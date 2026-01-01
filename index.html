@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paycheck Calc</title>
+    <style>
+        body { font-family: sans-serif; background: #f0f2f5; display: flex; justify-content: center; padding: 20px; }
+        .card { background: white; padding: 20px; border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); width: 100%; max-width: 350px; }
+        h2 { color: #2c3e50; text-align: center; }
+        label { display: block; margin-top: 15px; color: #666; font-size: 0.9em; }
+        input { width: 100%; padding: 12px; margin-top: 5px; border: 1px solid #ddd; border-radius: 8px; box-sizing: border-box; font-size: 16px; }
+        .result-box { margin-top: 20px; padding: 15px; background: #e8f5e9; border-radius: 8px; }
+        .result-line { display: flex; justify-content: space-between; margin-bottom: 5px; }
+        .total { font-weight: bold; color: #2e7d32; font-size: 1.2em; border-top: 1px solid #abd6af; pt: 5px; }
+    </style>
+</head>
+<body>
+
+<div class="card">
+    <h2>Paycheck Estimator</h2>
+    
+    <label>Total Hours Worked</label>
+    <input type="number" id="hours" placeholder="e.g. 25" oninput="calculate()">
+
+    <div class="result-box">
+        <div class="result-line">
+            <span>Gross Pay:</span>
+            <span id="gross">$0.00</span>
+        </div>
+        <div class="result-line">
+            <span>FICA Tax (7.65%):</span>
+            <span id="tax">-$0.00</span>
+        </div>
+        <div class="result-line total">
+            <span>Take Home:</span>
+            <span id="net">$0.00</span>
+        </div>
+    </div>
+</div>
+
+<script>
+    function calculate() {
+        const rate = 13.50;
+        const taxRate = 0.0765;
+        const hours = document.getElementById('hours').value;
+        
+        const gross = hours * rate;
+        const tax = gross * taxRate;
+        const net = gross - tax;
+
+        document.getElementById('gross').innerText = '$' + gross.toFixed(2);
+        document.getElementById('tax').innerText = '-$' + tax.toFixed(2);
+        document.getElementById('net').innerText = '$' + net.toFixed(2);
+    }
+</script>
+
+</body>
+</html>
